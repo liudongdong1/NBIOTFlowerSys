@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>花卉培育管理系统</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="Shortcut Icon" href="${request.contextPath}/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="${request.contextPath}/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/home.css" /> -->
+    <link rel="stylesheet" href="${request.contextPath}/css/main.css">
+</head>
+<body>
+
+<#include "${request.contextPath}/include/header.html"/>
+<#include "${request.contextPath}/include/nav.html"/>
+
+<!--右边主体内容-->
+<div id="content">
+
+    <!--主内容头部面包屑导航-->
+    <div id="content-header">
+        <ol class="breadcrumb">
+            <li class="active">
+                <a href="/datarestore"><span class="icon icon-pencil"></span>数据备份 </a>
+                <span>&gt;</span>
+                <a href="/sensorSetting"><span class="icon icon-cog"></span>数据管理</a>
+            </li>
+        </ol>
+    </div>
+    <!--主内容头部面包屑导航-->
+
+    <div class="container-fluid" id="dataSave">
+        <form>
+            <fieldset>
+                <legend>数据备份与还原</legend>
+                <div class="row">
+                    <label class="col-sm-2">手动备份到数据库</label>
+                    <div class="form-inline col-sm-2">
+                        <select class="form-control" id="select1_1">
+                            <option value="">数据采集表</option>
+                            <option value="">用户列表</option>
+                            <option value="">用户操作表</option>
+                            <option value="">预警信息表</option>
+                        </select>
+                    </div>
+                    <div class="form-inline col-sm-2">
+                        <select class="form-control" id="select1_2">
+                            <option value="">今天</option>
+                            <option value="">昨天</option>
+                            <option value="">前天</option>
+                            <option value="">...</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" role="button" class="btn btn-success" id="confirmBackup">确定备份</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2">自动备份频率</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" value="48" />
+                    </div>
+                    <span>小时/次</span>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2">还原为上一次备份数据</label>
+                    <div class="form-inline col-sm-2">
+                        <select class="form-control" id="select2_1">
+                            <option value="">数据采集表</option>
+                            <option value="">用户列表</option>
+                            <option value="">用户操作表</option>
+                            <option value="">预警信息表</option>
+                        </select>
+                    </div>
+                    <div class="form-inline col-sm-2">
+                        <select class="form-control" id="select2_2">
+                            <option value="">今天</option>
+                            <option value="">昨天</option>
+                            <option value="">前天</option>
+                            <option value="">...</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" role="button" class="btn btn-warning" id="confirmRestore">确定还原</button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>数据导出</legend>
+                <div class="row">
+                    <label class="col-sm-2">导出为excel表</label>
+                    <div class="form-inline col-sm-2">
+                        <select class="form-control" id="select3_1">
+                            <option value="">数据采集表</option>
+                            <option value="">用户列表</option>
+                            <option value="">用户操作表</option>
+                            <option value="">预警信息表</option>
+                        </select>
+                    </div>
+                    <div class="form-inline col-sm-2">
+                        <select class="form-control" id="select3_2">
+                            <option value="">今天</option>
+                            <option value="">昨天</option>
+                            <option value="">前天</option>
+                            <option value="">...</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="button" role="button" class="btn btn-info" id="confirmExport">确定导出</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<!--右边主体内容-->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">操作提示</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<#include "${request.contextPath}/include/footer.html"/>
+
+<script src='${request.contextPath}/js/jquery.min.js'></script>
+<script src='${request.contextPath}/js/bootstrap.min.js'></script>
+<script src="${request.contextPath}/js/common.js"></script>
+<script src="${request.contextPath}/js/dataManagement.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+server:
+  port: 8088
+spring:
+  mvc:
+    favicon:
+      enabled: false
+  application:
+    name: flower
+  datasource:
+    url: jdbc:mysql://localhost:3306/flower?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&serverTimezone=GMT
+    username: ldd
+    password: 12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  jpa:
+    database: mysql
+    show-sql: true     #显示mysql 语句
+    generate-ddl: true    #设置true会更具model 创建表结构
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        ddl-auto: update
+  freemarker:
+    prefix: 
+    suffix: .html
+    charset: UTF-8
+    enabled: true
+    request-context-attribute: request
+    template-loader-path:
+    - classpath:/templates/
+    content-type: text/html;charset=UTF-8
+  resources:
+    static-locations:
+    - classpath:/static/
+    - classpath:/templates/
+    - classpath:/public/
+    - file:${web.file-path}
+  
+  jackson:
+    serialization:
+      indent-output: true
+  http:
+
+  servlet:
+    multipart:
+      enabled: false
+web: 
+  file-path:  D:\flower

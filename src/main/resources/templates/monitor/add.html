@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>花卉培育管理系统</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="${request.contextPath}/lib/layui/css/layui.css">
+</head>
+<body>
+
+<div class="layui-layout layui-layout-admin">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <form class="layui-form"  onsubmit="return add('/monitor')">
+            <table class="layui-table">
+                <thead>
+                <td align="center">添加监测项目</td>
+                </thead>
+                <tr>
+                    <td style="width: 100px">项目名称：</td>
+                    <td>
+                        <input type="text"  name="name"  lay-verify="required" autocomplete="off" class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">创建者ID：</td>
+                    <td>
+                        <input type="text"  name="userid"  lay-verify="required" autocomplete="off" class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">项目位置：</td>
+                    <td>
+                        <input type="text"  name="location"  lay-verify="required" autocomplete="off" class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">版本：</td>
+                    <td>
+                        <input type="text"  name="version"  lay-verify="required" autocomplete="off" class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">项目状态：</td>
+                    <td>
+                        <select name="states" >
+                            <option value="">请选择</option>
+                            <option value="0">离线</option>
+                            <option value="1">在线</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">创建时间：</td>
+                    <td>
+                        <input type="date"  name="createdate"  lay-verify="required" autocomplete="off" class="layui-input" >
+                    </td>
+                </tr>
+                <tr style="width: 100px">项目介绍：</tr>
+                <tr>
+                    <input type="text"  name="remark"  lay-verify="required" autocomplete="off" class="layui-input" >
+                </tr>
+                <tr>
+                    <td>操作：</td>
+                    <td>
+                        <button type="submit" class="layui-btn">添加</button>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;" id="message"></span>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<!--事件函数js代码-->
+<#include "${request.contextPath}/include/footop.html"/>
+</body>
+</html>

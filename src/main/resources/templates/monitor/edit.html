@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>花卉培育管理系统</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="Shortcut Icon" href="${request.contextPath}/images/favicon.ico">
+    <link rel="stylesheet" href="${request.contextPath}/lib/layui/css/layui.css">
+</head>
+<body>
+
+<!--右边主体内容-->
+<div class="layui-layout layui-layout-admin">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <form class="layui-form"  onsubmit="return update('/monitor')">
+            <p align="center">编辑项目信息</p>
+            <table class="layui-table">
+                <tr>
+                    <td style="width: 100px">项目ID：</td>
+                    <td>
+                        <input type="text" value="${monitor.id!''}" name="id" required  class="layui-input" readonly="readonly">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">项目名称：</td>
+                    <td>
+                        <input type="text" value="${monitor.name!''}" name="name" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">创建者ID：</td>
+                    <td>
+                        <input type="text" value="${monitor.userid!''}" name="type" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">项目位置：</td>
+                    <td>
+                        <input type="text" value="${monitor.location!''}" name="color" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">项目状态：</td>
+                    <td>
+                        <select name="states" >
+                            <option value="">${monitor.states?string('在线','离线')}</option>
+                            <option value="0">离线</option>
+                            <option value="1">在线</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">版本：</td>
+                    <td>
+                        <input type="text" value="${monitor.version!''}" name="growperiod" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">创建时间：</td>
+                    <td>
+                        <input type="date" value=${(monitor.createdate?string("yyyy-MM-dd"))!''} name="createdate" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">项目介绍：</td>
+                    <td>
+                        <input type="text" value="${monitor.remark}" name="description" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td>操作：</td>
+                    <td>
+                        <button type="submit" class="layui-btn">更新</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<!--事件函数js代码-->
+<#include "${request.contextPath}/include/footop.html"/>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>花卉培育管理系统</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="Shortcut Icon" href="${request.contextPath}/images/favicon.ico">
+    <link rel="stylesheet" href="${request.contextPath}/lib/layui/css/layui.css">
+</head>
+<body>
+
+<!--右边主体内容-->
+<div class="layui-layout layui-layout-admin">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <form class="layui-form" >
+            <p align="center">花卉信息</p>
+            <table class="layui-table">
+                <tr>ID
+                    <td style="width: 100px">花卉：</td>
+                    <td>${flower.id!''}</td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">花卉名称：</td>
+                    <td>${flower.name!''}</td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">花卉种类：</td>
+                    <td>${flower.type!''}</td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">颜色：</td>
+                    <td>${flower.color!''}</td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">生长周期：</td>
+                    <td>${flower.growperiod!''}</td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">浇水间隔：</td>
+                    <td>${flower.waterperiod!''}</td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">修剪周期：</td>
+                    <td>${flower.cuttingperiod!''}</td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">购买时间：</td>
+                    <td>${(flower.createdate?string("yyyy-MM-dd"))!''}</td>
+                </tr>
+                <tr style="width: 100px">花卉介绍：</tr>
+                <tr>
+                    <input type="text"  name="description"  lay-verify="required" autocomplete="off" class="layui-input" readonly="readonly" >
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<!--事件函数js代码-->
+<#include "${request.contextPath}/include/footop.html"/>
+</div>
+</body>
+</html>

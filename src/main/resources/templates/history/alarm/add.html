@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>花卉培育管理系统</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="${request.contextPath}/lib/layui/css/layui.css">
+</head>
+<body>
+
+<div class="layui-layout layui-layout-admin">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <form class="layui-form"  onsubmit="return add('/alarm')">
+            <table class="layui-table">
+                <thead>
+                <td align="center">添加警告信息</td>
+                </thead>
+                <tr>
+                    <td style="width: 100px">设备ID：</td>
+                    <td>
+                        <input type="text"  name="deviceId"  lay-verify="required" autocomplete="off" class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">警告级别：</td>
+                    <td>
+                        <select name="state" >
+                            <option value="1">级别1</option>
+                            <option value="2">级别2</option>
+                            <option value="3">级别3</option>
+                            <option value="4">级别4</option>
+                            <option value="5">级别5</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">警告信息：</td>
+                    <td>
+                        <input type="text"  name="alarminfo"  lay-verify="required" autocomplete="off" class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">产生时间：</td>
+                    <td>
+                        <input type="date"  name="createdate"  lay-verify="required" autocomplete="off" class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">备注信息：</td>
+                    <td>
+                        <input type="text"  name="elsepara"  lay-verify="required" autocomplete="off" class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td>操作：</td>
+                    <td>
+                        <button type="submit" class="layui-btn">添加</button>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;" id="message"></span>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<!--事件函数js代码-->
+<#include "${request.contextPath}/include/footop.html"/>
+</body>
+</html>

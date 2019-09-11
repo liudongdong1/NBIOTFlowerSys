@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>花卉培育管理系统</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="Shortcut Icon" href="${request.contextPath}/images/favicon.ico">
+    <link rel="stylesheet" href="${request.contextPath}/lib/layui/css/layui.css">
+</head>
+<body>
+
+<!--右边主体内容-->
+<div class="layui-layout layui-layout-admin">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <form class="layui-form"  onsubmit="return update('/flower')">
+            <p align="center">编辑花卉信息</p>
+            <table class="layui-table">
+                <tr>
+                    <td style="width: 100px">花卉ID：</td>
+                    <td>
+                        <input type="text" value="${flower.id!''}" name="id" required  class="layui-input" readonly="readonly">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">花卉名称：</td>
+                    <td>
+                        <input type="text" value="${flower.name!''}" name="name" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">花卉种类：</td>
+                    <td>
+                        <input type="text" value="${flower.type!''}" name="type" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">颜色：</td>
+                    <td>
+                        <input type="text" value="${flower.color!''}" name="color" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">生长周期：</td>
+                    <td>
+                        <input type="text" value="${flower.growperiod!''}" name="growperiod" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">浇水间隔：</td>
+                    <td>
+                        <input type="text" value="${flower.waterperiod!''}" name="waterperiod" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">修剪周期：</td>
+                    <td>
+                        <input type="text" value="${flower.cuttingperiod!''}" name="cuttingperiod" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">购买时间：</td>
+                    <td>
+                        <input type="date" value=${(flower.createdate?string("yyyy-MM-dd"))!''} name="createdate" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">花卉介绍：</td>
+                    <td>
+                        <input type="text" value="${flower.description}" name="description" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td>操作：</td>
+                    <td>
+                        <button type="submit" class="layui-btn">更新</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<!--事件函数js代码-->
+<#include "${request.contextPath}/include/footop.html"/>
+</div>
+</body>
+</html>

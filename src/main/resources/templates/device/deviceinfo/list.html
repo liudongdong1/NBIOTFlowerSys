@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>花卉培育管理系统</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="Shortcut Icon" href="${request.contextPath}/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="${request.contextPath}/fonts/css/font-awesome.css"/>
+    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${request.contextPath}/css/main.css">
+    <link rel="stylesheet" href="${request.contextPath}/lib/layui/css/layui.css">
+    <script src='${request.contextPath}/js/jquery.min.js'></script>
+    <script src='${request.contextPath}/js/bootstrap.min.js'></script>
+    <script src="${request.contextPath}/js/common.js"></script>
+    <script src="${request.contextPath}/js/index.js"></script>
+    <script src="${request.contextPath}/lib/layui/layui.js"></script>
+</head>
+<body>
+<#include "${request.contextPath}/include/header.html"/>
+<#include "${request.contextPath}/include/nav.html"/>
+<!--右边主体内容-->
+<div id="content">
+    <!--主内容头部面包屑导航-->
+    <div id="content-header">
+        <ol class="breadcrumb">
+            <li class="active">
+                <a href="/index"><span class="icon icon-pencil"></span> 设备管理</a>
+            </li>
+        </ol>
+    </div>
+    <!--主内容头部面包屑导航-->
+    <!--用户列表-->
+    <div class="container-fluid table_list" id="device_list" style="padding-top: auto">
+        <div>
+            <form action="/deviceinfo/list" method="get" >
+                <!-- <input type="text" class="form-control" id="user_message" placeholder="输入用户名">-->
+                <!--<div class="input-group-addon" id="search">搜索</div>-->
+                <tr>
+                    <td >设备ID:</td>
+                    <td ><input name="id" ></td>
+                    <td >&nbsp;&nbsp;设备名:</td>
+                    <td ><input name="devicename"  ></td>
+                    <td>   <button class="layui-btn" type="submit"><i class="layui-icon">&#xe615;</i></button></td>
+                </tr>
+            </form>
+        </div>
+        <div >
+            <table id="device" class="table  table-striped  table-bordered table-hover " lay-filter="device">
+                <thead>
+                <tr>
+                    <!-- <th><input type="checkbox" class="checkAll" /></th>&ndash;&gt;-->
+                    <th lay-data="{field:'id', width:100,sort:true}">ID</th>
+                    <th lay-data="{field:'devicename', width:100}">设备名称</th>
+                    <th lay-data="{field:'factory', width:100}">生产厂家</th>
+                    <th lay-data="{field:'price', width:100}">价格</th>
+                    <th lay-data="{field:'deviceurl', width:100}">设备链接</th>
+                    <th lay-data="{field:'createdate', width:100}">购买时间</th>
+                    <th >操作&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="layui-btn" onclick="addpage('/deviceinfo/deviceinfoadd')"><i class="layui-icon">&#xe608;</i> 添加</button>
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="device_list_tbody">
+                <#list devices as p>
+                <tr>
+                    <td>${p.id!''}</td>
+                    <td>${p.devicename!''}</td>
+                    <td>${p.factory!''}</td>
+                    <td>${p.price!''}</td>
+                    <td>${p.deviceurl!''}</td>
+                    <td>${p.createdate!''}</td>
+                    <td>
+                        <button class="layui-btn" onclick="showpage('/deviceinfoshow/',${p.id!''})"><i class="layui-icon">&#xe715;</i></button>
+                        <button class="layui-btn" onclick="editpage('/deviceinfo/',${p.id!''})"><i class="layui-icon">&#xe642;</i></button>
+                        <button class="layui-btn" onclick="del('/deviceinfo/',${p.id!''})"><i class="layui-icon">&#xe640;</i></button>
+                    </td>
+                </tr>
+                </#list>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--设备列表-->
+</div>
+<!--<script>
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
+
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'device' //注意，这里的 test1 是 ID，不用加 # 号
+            ,count: 20 //数据总数，从服务端得到
+        });
+    });
+</script>-->
+<!--右边主体内容-->
+<#include "${request.contextPath}/include/footer.html"/>
+<!--事件函数js代码-->
+<#include "${request.contextPath}/include/footop.html"/>
+</body>
+</html>

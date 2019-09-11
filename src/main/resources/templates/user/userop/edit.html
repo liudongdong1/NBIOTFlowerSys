@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>花卉培育管理系统</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="Shortcut Icon" href="${request.contextPath}/images/favicon.ico">
+    <link rel="stylesheet" href="${request.contextPath}/lib/layui/css/layui.css">
+</head>
+<body>
+
+<!--右边主体内容-->
+<div class="layui-layout layui-layout-admin">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <form class="layui-form"  onsubmit="return update('/operationinfo')">
+            <p align="center">编辑信息</p>
+            <table class="layui-table">
+                <tr>
+                    <td style="width: 100px">记录ID：</td>
+                    <td>
+                        <input type="text" value="${opeartioninfo.id!''}" name="id" required  class="layui-input" readonly="readonly" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">设备ID：</td>
+                    <td>
+                        <input type="text" value="${opeartioninfo.deviceid!''}" name="deviceid" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">用户ID：</td>
+                    <td>
+                        <input type="text" value="${opeartioninfo.userid!''}" name="userid" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">故障原因：</td>
+                    <td>
+                        <input type="text" value="${opeartioninfo.operatereason!''}" name="operatereason" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">操作信息：</td>
+                    <td>
+                        <input type="text" value="${opeartioninfo.operateinfo!''}" name="operateinfo" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">创建日期：</td>
+                    <td>
+                        <input type="text" value="${opeartioninfo.createdate!''}" name="createdate" required  class="layui-input" >
+                    </td>
+                </tr>
+                <tr>
+                    <td>操作：</td>
+                    <td>
+                        <button type="submit" class="layui-btn">更新</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<!--事件函数js代码-->
+<#include "${request.contextPath}/include/footop.html"/>
+</div>
+</body>
+</html>

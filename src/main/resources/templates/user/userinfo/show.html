@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>花卉培育管理系统</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="Shortcut Icon" href="${request.contextPath}/images/favicon.ico">
+    <link rel="stylesheet" href="${request.contextPath}/lib/layui/css/layui.css">
+</head>
+<body>
+
+<!--右边主体内容-->
+<div class="layui-layout layui-layout-admin">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <form class="layui-form" >
+            <p align="center">查看信息</p>
+            <table class="layui-table">
+                <tr>
+                    <td style="width: 100px">用户账号：</td>
+                    <td>${user.id!''}</td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">用户姓名：</td>
+                    <td>${user.username!''}</td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">用户角色：</td>
+                    <td>${user.role!''}</td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">用户号码：</td>
+                    <td>${user.tel!''}</td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">用户地址：</td>
+                    <td>${user.address!''}</td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">用户注册日期：</td>
+                    <td>${(user.create_date?string("yyyy-MM-dd"))!''}</td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">用户描述信息：</td>
+                    <td>
+                        <input type="text" value="${user.description}" name="description" required  class="layui-input" readonly="readonly">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<!--事件函数js代码-->
+<#include "${request.contextPath}/include/footop.html"/>
+</div>
+</body>
+</html>

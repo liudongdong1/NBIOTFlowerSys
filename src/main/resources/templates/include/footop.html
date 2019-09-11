@@ -1,0 +1,145 @@
+<script src="${request.contextPath}/lib/layui/layui.all.js"></script>
+<script src="${request.contextPath}/js/jquery.min.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+ /*   layui.use('laypage', function(){
+        var laypage = layui.laypage;
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+            ,count: 5 //数据总数，从服务端得到
+            ,limit:5
+        });
+    });*/
+    function addpage(url){
+        //捕获页
+        layer.open({
+            type: 2,    //Layer提供了5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（if             //         rame层）3（加载层）4（tips层）
+            title: '添加页面',
+            closeBtn: 1,
+            area:['800px','600px'], //宽高
+            content: [url,'yes'],       //支持获取DOM元素 NO:不想让iframe出现滚动条
+            btn: ['取消'],      //按钮组
+            yes: function(index){       //点击确定回调
+                //事件
+                layer.close(index);
+            }
+        });
+    }
+    function showpage(url,id){
+        layer.open({
+            type: 2,
+            title: '详情页面',
+            closeBtn: 1,
+            area:['800px','600px'],
+            content: [url+id,'yes'],
+            btn: ['取消'],
+            yes: function(index){
+                //事件
+                layer.close(index);
+            }
+        });
+    }
+    function editpage(url,id){
+        layer.open({
+            type: 2,
+            title: '编辑页面',
+            closeBtn: 1,
+            area:['800px','600px'],
+            content: [url+id,'yes'],
+            btn: ['取消'],
+            yes: function(index){
+                //事件
+                layer.close(index);
+            }
+        });
+    }
+    /**
+     * 删除操作测试正常 url+id
+     * */
+    function del(url,id) {
+        layer.confirm('确认要删除吗？', {
+            btn : [ '确定', '取消' ]//按钮
+        }, function(index) {
+            layer.close(index);
+            console.log(id);
+            $.ajax({
+                url:url+id,
+                type:'delete',
+                success:function(data){
+                    alert(data.message);
+                    parent.location.reload();
+                },
+                error:function (data) {
+                    alert(data.message);
+                    layer.msg(data.message, {
+                        time: 2000, //2s后自动关闭
+                    });
+                }
+            });
+        });
+    }
+    function update(url){
+        var d = {};
+        var t = $('form').serializeArray();
+        $.each(t, function() {
+            d[this.name] = this.value;
+        });
+        var json=JSON.stringify(d);
+        $.ajax({
+            url:url,
+            type:'put',
+            data:json,
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                console.log(data.message);
+                if(data.message=="操作失败"){
+                    $("#message").text(data.message);
+                }
+                else {
+                    alert(data.message);
+                    parent.location.reload();
+                }
+            },
+            error:function (data) {
+                layer.msg(data.message, {
+                    time: 2000, //2s后自动关闭
+                });
+            }
+        });
+        return false
+    }
+    function add(url){
+        var d = {};
+        var t = $('form').serializeArray();
+        $.each(t, function() {
+            d[this.name] = this.value;
+        });
+        var json=JSON.stringify(d);
+        $.ajax({
+            url:url,
+            type:'post',
+            data:json,
+            contentType: "application/json;charset=utf-8",
+            success:function(data){
+                console.log(data.message);
+                if(data.message=="操作失败"||data.message=="该身份证已被注册或使用"){
+                    $("#message").text(data.message);
+                }
+                else {
+                    parent.location.reload();
+                }
+            },
+            error:function (data) {
+                layer.msg(data.message, {
+                    time: 2000, //2s后自动关闭
+                });
+            }
+        });
+        return false
+    }
+</script>

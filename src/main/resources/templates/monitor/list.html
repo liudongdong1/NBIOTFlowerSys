@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>项目培育管理系统</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="Shortcut Icon" href="${request.contextPath}/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="${request.contextPath}/fonts/css/font-awesome.css"/>
+    <link rel="stylesheet" href="${request.contextPath}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${request.contextPath}/css/main.css">
+    <link rel="stylesheet" href="${request.contextPath}/lib/layui/css/layui.css">
+    <script src='${request.contextPath}/js/jquery.min.js'></script>
+    <script src='${request.contextPath}/js/bootstrap.min.js'></script>
+    <script src="${request.contextPath}/js/common.js"></script>
+    <script src="${request.contextPath}/js/index.js"></script>
+    <script src="${request.contextPath}/lib/layui/layui.js"></script>
+</head>
+<body>
+<#include "${request.contextPath}/include/header.html"/>
+<#include "${request.contextPath}/include/nav.html"/>
+<!--右边主体内容-->
+<div id="content">
+    <!--主内容头部面包屑导航-->
+    <div id="content-header">
+        <ol class="breadcrumb">
+            <li class="active">
+                <a href="/index"><span class="icon icon-pencil"></span> 项目监控管理</a>
+            </li>
+        </ol>
+    </div>
+    <!--主内容头部面包屑导航-->
+    <!--用户列表-->
+    <div class="container-fluid table_list" id="monitor_list" style="padding-top: auto">
+        <div>
+            <form action="/monitor/list" method="get" >
+                <!-- <input userid="text" class="form-control" id="monitor_message" placeholder="输入用户名">-->
+                <!--<div class="input-group-addon" id="search">搜索</div>-->
+                <tr>
+                    <td >项目名称:</td>
+                    <td ><input name="name" ></td>
+                    <td >&nbsp;&nbsp;创建者ID:</td>
+                    <td ><input name="userid"  ></td>
+                    <td>   <button class="layui-btn" userid="submit"><i class="layui-icon">&#xe615;</i></button></td>
+                </tr>
+            </form>
+        </div>
+        <div >
+            <table id="monitor" class="table  table-striped  table-bordered table-hover " lay-filter="monitor">
+                <thead>
+                <tr>
+                    <!-- <th><input userid="checkbox" class="checkAll" /></th>&ndash;&gt;-->
+                    <th lay-data="{field:'id', width:100,sort:true}">项目ID</th>
+                    <th lay-data="{field:'name', width:100}">项目名称</th>
+                    <th lay-data="{field:'userid', width:100}">创建者ID</th>
+                    <th lay-data="{field:'location', width:100}">项目位置</th>
+                    <th lay-data="{field:'version', width:100}">版本</th>
+                    <th lay-data="{field:'states', width:100}">项目状态</th>
+                    <th lay-data="{field:'createdate', width:100}">创建时间</th>
+                    <th >操作&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="layui-btn" onclick="addpage('/monitor/monitoradd')"><i class="layui-icon">&#xe608;</i> 添加</button>
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="monitor_list_tbody">
+                <#list monitors as p>
+                <tr>
+                    <td>${p.id!''}</td>
+                    <td>${p.name!''}</td>
+                    <td>${p.userid!''}</td>
+                    <td>${p.location!''}</td>
+                    <td>${p.version!''}</td>
+                    <td>${p.states?string("在线","离线")}</td>
+                    <td>${p.createdate!''}</td>
+                    <td>
+                        <button class="layui-btn" onclick="showpage('/monitorshow/',${p.id!''})"><i class="layui-icon">&#xe715;</i></button>
+                        <button class="layui-btn" onclick="editpage('/monitor/',${p.id!''})"><i class="layui-icon">&#xe642;</i></button>
+                        <button class="layui-btn" onclick="del('/monitor/',${p.id!''})"><i class="layui-icon">&#xe640;</i></button>
+                    </td>
+                </tr>
+                </#list>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--用户列表-->
+</div>
+
+<!--<script>
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
+
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'monitor' //注意，这里的 test1 是 ID，不用加 # 号
+            ,count: 20 //数据总数，从服务端得到
+        });
+    });
+</script>-->
+<!--右边主体内容-->
+<#include "${request.contextPath}/include/footer.html"/>
+<!--事件函数js代码-->
+<#include "${request.contextPath}/include/footop.html"/>
+</body>
+</html>

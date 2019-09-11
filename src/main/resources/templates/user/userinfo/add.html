@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>花卉培育管理系统</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="${request.contextPath}/lib/layui/css/layui.css">
+</head>
+<body>
+
+    <div class="layui-layout layui-layout-admin">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <form class="layui-form"  onsubmit="return add('/userinfo')">
+                <table class="layui-table">
+                    <thead>
+                      <td align="center">注册信息填写</td>
+                    </thead>
+                    <tr>
+                        <td style="width: 100px">用户姓名：</td>
+                        <td>
+                            <input type="text"  name="username"  lay-verify="required" autocomplete="off" class="layui-input" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">用户密码：</td>
+                        <td>
+                            <input type="password"  name="password"  lay-verify="required" autocomplete="off" class="layui-input" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">用户角色：</td>
+                        <td>
+                            <select name="role" >
+                                <option value="">请选择</option>
+                                <option value="管理员">管理员</option>
+                                <option value="用户">用户</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">用户号码：</td>
+                        <td>
+                            <input type="text"  name="tel"  lay-verify="required" autocomplete="off" class="layui-input" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">用户地址：</td>
+                        <td>
+                            <input type="text"  name="address"  lay-verify="required" autocomplete="off" class="layui-input" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">用户介绍：</td>
+                        <td>
+                            <input type="text"  name="description"  lay-verify="required" autocomplete="off" class="layui-input" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>操作：</td>
+                        <td>
+                            <button type="submit" class="layui-btn">添加</button>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;" id="message"></span>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <!--事件函数js代码-->
+    <#include "${request.contextPath}/include/footop.html"/>
+</body>
+</html>
