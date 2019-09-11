@@ -10,28 +10,17 @@
     <!-- <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/home.css" /> -->
     <link rel="stylesheet" href="${request.contextPath}/css/main.css">
+    <link rel="Shortcut Icon" href="${request.contextPath}/images/favicon.ico">
+    <link rel="stylesheet" href="${request.contextPath}/css/font.css">
+    <link rel="stylesheet" href="${request.contextPath}/css/xadmin.css">
 </head>
 <body>
 
-<#include "${request.contextPath}/include/header.html"/>
-<#include "${request.contextPath}/include/nav.html"/>
 
 <!--右边主体内容-->
-<div id="content">
-
-    <!--主内容头部面包屑导航-->
-    <div id="content-header">
-        <ol class="breadcrumb">
-            <li class="active">
-                <a href="/datarestore"><span class="icon icon-pencil"></span>数据备份 </a>
-                <span>&gt;</span>
-                <a href="/sensorSetting"><span class="icon icon-cog"></span>数据管理</a>
-            </li>
-        </ol>
-    </div>
-    <!--主内容头部面包屑导航-->
-
-    <div class="container-fluid" id="dataSave">
+<div class="layui-fluid">
+    <div class="layui-row">
+      <div class="container-fluid" id="dataSave">
         <form>
             <fieldset>
                 <legend>数据备份与还原</legend>
@@ -113,6 +102,7 @@
                 </div>
             </fieldset>
         </form>
+    </div>
     </div>
 </div>
 <!--右边主体内容-->
