@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * @Author liudongdong
@@ -21,6 +22,7 @@ import java.util.List;
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
+    private Logger logger= Logger.getLogger("UserServiceImpl");
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -39,7 +41,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public String login(User user) {
         String message="";
+        logger.info(user.getUsername());
         User user1=userRepository.findUserByUsername(user.getUsername());
+        logger.info(user1.toString());
         if(user1!=null){
             if(!user1.getPassword().equals(user.getPassword())){
                 message="密码错误";

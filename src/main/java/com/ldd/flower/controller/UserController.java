@@ -5,6 +5,11 @@ import com.ldd.flower.entity.OperationInfo;
 import com.ldd.flower.entity.User;
 import com.ldd.flower.service.OperationInfoService;
 import com.ldd.flower.service.UserService;
+import com.ldd.flower.util.JsonResult;
+import com.ldd.flower.util.MD5Utils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -44,16 +49,36 @@ public class UserController {
      * @responseBody注解的作用是将controller的方法返回的对象通过适当的转换器转换为指定的格式之后，写入到response对象的body区，通常用来返回JSON数据或者是XML
      * 可以直接用ModelandView类
      * */
-
+    //这里如果没有@RequestBody ，则user 类是空的
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject login(@RequestBody User user, HttpSession session){
-        logger.info("login_post");
+        logger.info("login_post"+user.toString());
         JSONObject json=new JSONObject();
         json.put("message",userService.login(user));
         logger.info("login_post: message"+json.getString("message"));
         session.setAttribute("user",userService.findByUsername(user.getUsername()));
         return json;
+        //password = MD5Utils.encrypt(username, password);  数据中中存储的是为加密密码
+      /* 登陆成功后返回，但并不转发页面
+      {
+         "msg": "操作成功",
+         "code": 200
+       }
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(token);
+            return JsonResult.ok();
+        } catch (UnknownAccountException e) {
+            return JsonResult.error(e.getMessage());
+        } catch (IncorrectCredentialsException e) {
+            return JsonResult.error(e.getMessage());
+        } catch (LockedAccountException e) {
+            return JsonResult.error(e.getMessage());
+        } catch (AuthenticationException e) {
+            return JsonResult.error("认证失败！");
+        }*/
     }
     @RequestMapping(value = "/loginout",method = RequestMethod.GET)
     public String loginout(HttpSession session){

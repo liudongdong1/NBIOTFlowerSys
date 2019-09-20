@@ -44,8 +44,8 @@
                 <tr>
                     <!-- <th><input type="checkbox" class="checkAll" /></th>&ndash;&gt;-->
                     <th lay-data="{field:'id', width:100,sort:true}">ID</th>
-                    <th lay-data="{field:'username', width:100}">记录员</th>
-                    <th lay-data="{field:'devicename', width:100}">设备名</th>
+                    <th lay-data="{field:'userid', width:100}">记录员</th>
+                    <th lay-data="{field:'deviceid', width:100}">设备名</th>
                     <th lay-data="{field:'operatereason', width:100}">故障原因</th>
                     <th lay-data="{field:'operateinfo', width:100}">操作内容</th>
                     <th lay-data="{field:'createdate', width:100}">记录时间</th>
@@ -58,9 +58,9 @@
                 <#list operations as p>
                 <tr>
                     <td>${p.id!''}</td>
-                    <td>${p.username!''}</td>
-                    <td>${p.devicename!''}</td>
-                    <td>${p.operatereason!''}</td>
+                    <td>${p.userid!'${username}'}</td>
+                    <td>${p.deviceid!'${devicename}'}</td>
+                    <td>${p.operatereasion!''}</td>
                     <td>${p.operateinfo!''}</td>
                     <td>${p.createdate!''}</td>
                     <td>

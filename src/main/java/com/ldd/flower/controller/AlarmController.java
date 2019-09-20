@@ -59,6 +59,7 @@ public class AlarmController {
          *  #error re For "#list" list source: Expected a sequence or collection, but this has evaluated to a string (wrapper: f.t.SimpleScalar):
          * */
         logger.info("/alarm/list: alarmInfos size="+alarmInfos.size());
+        logger.info("alarminfo一个记录信息为："+alarmInfos.get(0).toString());
         ModelAndView modelAndView=new ModelAndView("history/alarm/list");
         modelAndView.addObject("alarms",alarmInfos);
         return modelAndView;

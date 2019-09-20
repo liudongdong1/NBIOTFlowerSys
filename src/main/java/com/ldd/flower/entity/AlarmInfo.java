@@ -10,6 +10,7 @@ import java.util.Date;
  * @Author liudongdong
  * @Date Created in 9:35 2019/9/6
  * @Description
+ * debug record if the entity dont have the get method ,then in freemaker p.deviceID is null
  */
 @Entity
 @Table(name = "sys_alarminfo")
@@ -19,6 +20,10 @@ public class AlarmInfo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    public long getDeviceId() {
+        return deviceId;
+    }
 
     private long deviceId;
 
