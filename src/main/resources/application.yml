@@ -7,7 +7,7 @@ spring:
   application:
     name: flower
   datasource:
-    url: jdbc:mysql://localhost:3306/flower?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&serverTimezone=GMT
+    url: jdbc:mysql://140.143.210.30:3306/flower?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&serverTimezone=GMT
     username: ldd
     password: 12345
     driver-class-name: com.mysql.cj.jdbc.Driver

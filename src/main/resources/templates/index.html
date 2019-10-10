@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
 	<title>花卉培育管理系统</title>
+	<!--<meta http-equiv="refresh" content="2">-->  <!--2s刷新-->
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link rel="Shortcut Icon" href="${request.contextPath}/images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="${request.contextPath}/fonts/css/font-awesome.css"/>
@@ -25,6 +26,28 @@
 	<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
 	<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
+
+	<script>
+        setInterval(function() {
+                Update();
+            },
+            2000);//三秒后执行 execute it after 3 seconds
+        /*请求函数的ajax*/
+        function Update() {
+            $.ajax({
+                type: "get",
+                url: "/update",//需要跳转到的界面 the page you want to post data
+                success: function(data) {
+                    //需要执行的操作 execute it
+					var temperture=data.temperture;
+					var Humity=data.Humity;
+					var moisture=data.moisture;
+					alert(" "+temperture+" "+Humity+" "+moisture);
+                }
+        	});
+        }
+	</script>
+
 </head>
 <body>
 <body class="index">
@@ -192,28 +215,28 @@
 								<div class="col-sm-6 col-md-6 col-lg-3">
 									<div class="tile tile-pink">
 										<span class="icon  icon-dashboard icon-3x"></span>
-										<p class="parameterValue"  id="temperture">20.1℃</p>
+										<p class="parameterValue"  id="temperture">${temperture!'20.1'}℃</p>
 										<p class="parameter">温度</p>
 									</div>
 								</div>
 								<div class="col-sm-6 col-md-6 col-lg-3">
 									<div class="tile tile-blue">
 										<span class="icon  icon-bar-chart icon-3x"></span>
-										<p class="parameterValue"  id="rjy_zd">8.45mg/L</p>
+										<p class="parameterValue"  id="Humity">${Humity!'40'}%</p>
 										<p class="parameter">湿度</p>
 									</div>
 								</div>
 								<div class="col-sm-6 col-md-6 col-lg-3">
 									<div class="tile tile-paleBlue">
 										<span class="icon icon-signal icon-3x"></span>
-										<p class="parameterValue"  id="rjy_bhd">95.60%</p>
+										<p class="parameterValue"  id="Light">${Light!'2000'}lux</p>
 										<p class="parameter">光照</p>
 									</div>
 								</div>
 								<div class="col-sm-6 col-md-6 col-lg-3">
 									<div class="tile tile-purple">
 										<span class="icon  icon-beaker icon-3x"></span>
-										<p class="parameterValue"  id="ph">7.0</p>
+										<p class="parameterValue"  id="moisture">${moisture!'20'}%</p>
 										<p class="parameter">土壤湿度</p>
 									</div>
 								</div>

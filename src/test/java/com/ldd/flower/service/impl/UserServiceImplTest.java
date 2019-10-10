@@ -29,9 +29,9 @@ public class UserServiceImplTest {
     private Logger logger= Logger.getLogger("UserServiceTest");
     @Autowired
     private UserService userService;
-    @Test
+   /* @Test
     public void updateUser() {
-        /*id=268, username='张园博', password='123456', salt='123456', role='管理员', tel='1785412884'*/
+        *//*id=268, username='张园博', password='123456', salt='123456', role='管理员', tel='1785412884'*//*
         User user=userService.findByUsername("刘冬冬");
         logger.info("update_before:"+user.toString());
         user.setAddress("山东省淄博市");
@@ -67,8 +67,8 @@ public class UserServiceImplTest {
         logger.info("id--"+user.getUsername()+"--");
         User user2=userService.findByUsername(user.getUsername());
         logger.info("findBynameAfter:"+user2.toString());
-        /*logger.info(user.toString());*/
-       /*  assertEquals(" 王博",user.getUsername());*/
+        *//*logger.info(user.toString());*//*
+       *//*  assertEquals(" 王博",user.getUsername());*//*
     }
 
     @Test
@@ -81,7 +81,7 @@ public class UserServiceImplTest {
         User user2=userService.findById(user1.getId());
         assertEquals(true,userService.exitById(user2.getId()));
     }
-
+*/
     @Test
     public void saveAndFlush() {
         userService.save(new UserInitData().getUsers(89));

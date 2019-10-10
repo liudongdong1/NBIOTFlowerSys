@@ -1,16 +1,21 @@
 package com.ldd.flower.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ldd.flower.entity.Monitor;
 import com.ldd.flower.service.MonitorService;
+import com.ldd.flower.util.JsonResult;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.*;
 import java.util.logging.Logger;
 
 /**
@@ -23,6 +28,9 @@ public class MonitorController {
     private Logger logger=Logger.getLogger("MonitorController");
     @Autowired
     private MonitorService monitorService;
+    private Queue<Integer> temperature = new LinkedList<>();
+    private Queue<Integer> humidity = new LinkedList<>();
+    private Queue<Integer> luminance = new LinkedList<>();
     /**
      * 登陆首页
      * */
@@ -31,17 +39,94 @@ public class MonitorController {
     {
         return "index";
     }
-
+    /**
+     * 刷新网页传感器数据值
+     * */
+    @RequestMapping(value="/update")
+    @ResponseBody
+    public JsonResult updateSensor(HttpServletRequest request, HttpServletResponse response)
+    {
+       /* ModelAndView modelAndView=new ModelAndView("index");
+        Random random=new Random();
+        Integer temp=random.nextInt(100);
+        modelAndView.addObject("temperture",temp);
+        modelAndView.addObject("Humity",temp);
+        modelAndView.addObject("Humity",temp);
+        modelAndView.addObject("moisture",temp);
+        return modelAndView;*/
+        JsonResult jsonResult=JsonResult.ok();
+        Random random=new Random();
+        Integer temp=random.nextInt(100);
+        jsonResult.put("temperture",temp);
+        jsonResult.put("Humity",temp);
+        jsonResult.put("Light",temp);
+        jsonResult.put("moisture",temp);
+        return jsonResult;
+    }
     /**
      * 一个项目信息具体展示
      * */
     @RequestMapping(value = {"/monitorsingle"})
     public ModelAndView monitorSinglePage(){
-        ModelAndView modelAndView=new ModelAndView("monitor/show");
+        ModelAndView modelAndView=new ModelAndView("index");
         return modelAndView;
     }
+    /**
+     * 用于接受华为云平台上传的数据
+     * */
+    @RequestMapping(value = "/receive.html",method = {RequestMethod.POST,RequestMethod.GET})
+    @ResponseBody
+    public JsonResult receive(HttpServletRequest request, HttpServletResponse response){
+        response.setStatus(200);
+        try{
+            BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream(),"utf-8"));
+            StringBuffer sb = new StringBuffer("");
+            String temp;
+            while ((temp = br.readLine()) != null){
+                sb.append(temp);
+            }
+            //logger.info("recieve info"+sb.toString());
+            br.close();
+            temp=sb.toString();
+            JSONObject jsonObject = JSON.parseObject(temp).getJSONObject("service").getJSONObject("data");
+            logger.info(jsonObject.toJSONString());
+            if(jsonObject.containsKey("luminance")) {
+                logger.info("luninance"+jsonObject.getInteger("luminance"));
+                if (luminance.size()<100)
+                    luminance.add(jsonObject.getInteger("luminance"));
+                else{
+                    luminance.poll();
+                    luminance.add(jsonObject.getInteger("luminance"));
+                }
+            }
+            if(jsonObject.containsKey("temperature")) {
+                logger.info(" " + jsonObject.getInteger("temperature") + "  " + jsonObject.getInteger("humidity"));
+                if(humidity.size()<100)
+                    humidity.add(jsonObject.getInteger("humidity"));
+                else{
+                    humidity.poll();
+                    humidity.add(jsonObject.getInteger("humidity"));
+                }
+                if(temperature.size()<100)
+                    temperature.add(jsonObject.getInteger("temperature"));
+                else{
+                    temperature.poll();
+                    temperature.add(jsonObject.getInteger("temperature"));
+                }
+            }
+            logger.info("data:"+sb.toString());
+            sb.delete(0,sb.length());
 
-
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        JsonResult jsonResult=JsonResult.ok();
+        jsonResult.put("temperture",temperature.peek());
+        jsonResult.put("Humity",humidity.peek());
+        jsonResult.put("Light",luminance.peek());
+        jsonResult.put("moisture",60);
+        return jsonResult;
+    }
     /**
      * 警告记录信息controller
      * */

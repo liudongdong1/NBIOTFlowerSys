@@ -77,7 +77,7 @@ public class DeviceServiceImplTest {
     /**
      * 初始化device数据表
      * */
-    @Test
+   /* @Test
     public void save() {
         deviceService.save(new DeviceInitData().getDevice(5));
         List<Device> deviceList= deviceService.findAll();
@@ -85,9 +85,9 @@ public class DeviceServiceImplTest {
             logger.info(device.toString());
 
     }
-    /**
+    *//**
      * 初始化flower数据表
-     * */
+     * *//*
     @Test
     public void initFlowers(){
         flowerService.save(new FlowerInitData().getFlower());
@@ -96,9 +96,9 @@ public class DeviceServiceImplTest {
             logger.info(flower.toString());
     }
 
-    /**
+    *//**
      *初始化Monitor项目表
-     * */
+     * *//*
     @Test
     public void monitorTable()
     {
@@ -125,9 +125,9 @@ public class DeviceServiceImplTest {
         monitors=monitorService.findAll();
         logger.info("initMonitorTable: size"+monitors.size());
     }
-    /**
+    *//**
      *初始化alarminfo和operation项目表
-     * */
+     * *//*
     @Test
     public void alarminfoAndOperationTable(){
         int size=100;  //初始化个数
@@ -178,9 +178,9 @@ public class DeviceServiceImplTest {
         alarmInfoService.save(alarmInfos);
     }
 
-    /**
+    *//**
      * 产生传感器数据随即数60个，以","连接，返回字符串
-     * */
+     * *//*
     public String generateSensorInfo(){
         StringBuffer stringBuffer=new StringBuffer("20");
         for(int i=0;i<60;i++)
@@ -188,5 +188,5 @@ public class DeviceServiceImplTest {
             stringBuffer.append(random.nextInt(20)+20).append(",");
         }
         return stringBuffer.toString();
-    }
+    }*/
 }
