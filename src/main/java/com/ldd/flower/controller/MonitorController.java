@@ -28,9 +28,10 @@ public class MonitorController {
     private Logger logger=Logger.getLogger("MonitorController");
     @Autowired
     private MonitorService monitorService;
-    private Queue<Integer> temperature = new LinkedList<>();
-    private Queue<Integer> humidity = new LinkedList<>();
-    private Queue<Integer> luminance = new LinkedList<>();
+    private static Queue<Integer> temperature = new LinkedList<>();
+    private static Queue<Integer> humidity = new LinkedList<>();
+    private static Queue<Integer> luminance = new LinkedList<>();
+    private static Queue<Integer> soilMoisture = new LinkedList<>();
     /**
      * 登陆首页
      * */
@@ -55,12 +56,27 @@ public class MonitorController {
         modelAndView.addObject("moisture",temp);
         return modelAndView;*/
         JsonResult jsonResult=JsonResult.ok();
-        Random random=new Random();
-        Integer temp=random.nextInt(100);
-        jsonResult.put("temperture",temp);
-        jsonResult.put("Humity",temp);
-        jsonResult.put("Light",temp);
-        jsonResult.put("moisture",temp);
+       /* Random random=new Random();
+        Integer temp=random.nextInt(100);*/
+        jsonResult.put("temperture",temperature.peek());
+        jsonResult.put("Humity",humidity.peek());
+        jsonResult.put("Light",luminance.peek());
+        jsonResult.put("moisture",soilMoisture.peek());
+        StringBuffer stringBuffer=new StringBuffer();
+        stringBuffer.append("temperature");
+        for(Integer integer:temperature){
+            stringBuffer.append(integer).append(" , ");
+        }
+        stringBuffer.append("humidity");
+        for(Integer integer:humidity)
+            stringBuffer.append(integer).append(" , ");
+        stringBuffer.append("luminace");
+        for(Integer integer: luminance)
+            stringBuffer.append(integer).append(" , ");
+        stringBuffer.append("moisture");
+        for(Integer integer: soilMoisture)
+            stringBuffer.append(integer).append(" , ");
+        jsonResult.put("alldata",stringBuffer.toString());
         return jsonResult;
     }
     /**
@@ -90,9 +106,20 @@ public class MonitorController {
             temp=sb.toString();
             JSONObject jsonObject = JSON.parseObject(temp).getJSONObject("service").getJSONObject("data");
             logger.info(jsonObject.toJSONString());
+            if(jsonObject.containsKey("SoilMoisture")) {
+                    logger.info("ldd SoilMoisture"+jsonObject.getInteger("SoilMoisture")+" size="+soilMoisture.size());
+                    if(soilMoisture.size()>5)
+                        soilMoisture.clear();
+                    if (soilMoisture.size()<5)
+                        soilMoisture.add(jsonObject.getInteger("SoilMoisture"));
+                    else{
+                    soilMoisture.poll();
+                    soilMoisture.add(jsonObject.getInteger("SoilMoisture"));
+                }
+            }
             if(jsonObject.containsKey("luminance")) {
                 logger.info("luninance"+jsonObject.getInteger("luminance"));
-                if (luminance.size()<100)
+                if (luminance.size()<5)
                     luminance.add(jsonObject.getInteger("luminance"));
                 else{
                     luminance.poll();
@@ -101,17 +128,17 @@ public class MonitorController {
             }
             if(jsonObject.containsKey("temperature")) {
                 logger.info(" " + jsonObject.getInteger("temperature") + "  " + jsonObject.getInteger("humidity"));
-                if(humidity.size()<100)
-                    humidity.add(jsonObject.getInteger("humidity"));
+                if(humidity.size()<5)
+                    humidity.add(jsonObject.getInteger("humidity")/10);
                 else{
                     humidity.poll();
-                    humidity.add(jsonObject.getInteger("humidity"));
+                    humidity.add(jsonObject.getInteger("humidity")/10);
                 }
-                if(temperature.size()<100)
-                    temperature.add(jsonObject.getInteger("temperature"));
+                if(temperature.size()<5)
+                    temperature.add(jsonObject.getInteger("temperature")/10);
                 else{
                     temperature.poll();
-                    temperature.add(jsonObject.getInteger("temperature"));
+                    temperature.add(jsonObject.getInteger("temperature")/10);
                 }
             }
             logger.info("data:"+sb.toString());
@@ -121,10 +148,19 @@ public class MonitorController {
             e.printStackTrace();
         }
         JsonResult jsonResult=JsonResult.ok();
-        jsonResult.put("temperture",temperature.peek());
+        StringBuffer stringBuffer=new StringBuffer();
+        for(Integer integer:temperature){
+            stringBuffer.append(integer).append(" , ");
+        }
+        for(Integer integer:humidity)
+            stringBuffer.append(integer).append(" , ");
+        for(Integer integer: luminance)
+            stringBuffer.append(integer).append(" , ");
+      /*  jsonResult.put("temperture",temperature.peek());
         jsonResult.put("Humity",humidity.peek());
         jsonResult.put("Light",luminance.peek());
-        jsonResult.put("moisture",60);
+        jsonResult.put("moisture",60);*/
+        jsonResult.put("data",stringBuffer.toString());
         return jsonResult;
     }
     /**

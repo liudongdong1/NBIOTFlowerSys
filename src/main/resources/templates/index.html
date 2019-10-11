@@ -42,7 +42,13 @@
 					var temperture=data.temperture;
 					var Humity=data.Humity;
 					var moisture=data.moisture;
-					alert(" "+temperture+" "+Humity+" "+moisture);
+					var Light=data.Light;
+                    $("#temperture").text(temperture+"℃");
+                    $("#Humity").text(Humity+"%");
+                    $("#moisture").text(moisture);
+                    $("#Light").text(Light+"Lux");
+                    if(temperture>30)
+                        $("#ldddanger").text("温度 ："+temperture+"℃ 温度过高")
                 }
         	});
         }
@@ -263,8 +269,8 @@
 									 <tr class="danger">
                                         <td>1</td>
                                         <td>1234534</td>
-                                        <td>温度为29℃，过高！</td>
-                                        <td>2016/5/18 22:09:27</td>
+                                        <td id="ldddanger">温度为29℃，过高！</td>
+                                        <td>2018/5/18 22:09:27</td>
                                         <td>...</td>
                                     </tr>
 

@@ -20,7 +20,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Object user = request.getSession().getAttribute("user");
-        logger.info(request.getServletPath());
+       // logger.info(request.getServletPath());
         // 如果获取的request的session中的loginUser参数为空（未登录），就返回登录页，否则放行访问
         if("/receive.html".equals(request.getServletPath()))
         {
@@ -34,7 +34,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             request.getRequestDispatcher("/login").forward(request, response);
             return false;
         } else {
-            logger.info("已经登录");
+            //logger.info("已经登录");
             // 已登录，放行
             return true;
         }
